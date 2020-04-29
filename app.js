@@ -25,7 +25,7 @@ const value = {
 class Calculator {
   //This will be the value of number which is given when someone give their first input
   constructor() {
-    this.currentValue = 10;
+    this.currentValue = undefined;
 
     // this history of past input and operations in sign form eg +,-,*,/.
     //Type [123,+,453,/]  array of number and sign
@@ -91,41 +91,6 @@ class Calculator {
   
   */
 
-  //this function will take the second user input and then calculated it with current value ;
-  //consider the the this.currentFunction to decide what to do;
-  operations(valueToBeOperated) {
-    if (this.currentValue == undefined) {
-      this.currentValue = valueToBeOperated;
-      return;
-    }
-
-    if (this.currentFunction == "+") {
-      this.ans = this.add(valueToBeOperated, parseFloat(this.currentValue));
-    }
-    if (this.currentFunction == "-") {
-      this.ans = this.sub(valueToBeOperated, parseFloat(this.currentValue));
-    }
-    if (this.currentFunction == "*") {
-      this.ans = this.multiply(
-        valueToBeOperated,
-        parseFloat(this.currentValue)
-      );
-    }
-    if (this.currentFunction == "/") {
-      if (this.valueToBeOperated == 0) {
-        return "not possible";
-      }
-      this.ans = this.divide(valueToBeOperated, parseFloat(this.currentValue));
-    }
-
-    return this.update(this.ans, valueToBeOperated);
-  }
-  /*
-  
-  
-  
-  */
-
   //this function is everything that should be updated when a operation is finished
   //takes two parameter first is thing that has to be updated eg: the current value need to be changing
   update(whatToUpdate, historyToBeAdded) {
@@ -150,26 +115,69 @@ class Calculator {
   
   */
 
+  //this function will take the second user input and then calculated it with current value ;
+  //consider the the this.currentFunction to decide what to do;
+  operations(valueToBeOperated) {
+    //this checks that is in currrent state of this.currentValue is undefined or not
+    //if current value is undefined we set the this to this.currentValue as users first input
+    if (this.currentValue == undefined) {
+      this.currentValue = valueToBeOperated;
+      return;
+    }
+
+    //this here actual implemetnation is done considering the this.currentFunction's value
+    if (this.currentFunction == "+") {
+      //here the ans is updated
+      this.ans = this.add(valueToBeOperated, this.currentValue);
+    }
+
+    //this here actual implemetnation is done considering the this.currentFunction's value
+    if (this.currentFunction == "-") {
+      //here the ans is updated
+      this.ans = this.sub(valueToBeOperated, parseFloatthis.currentValue);
+    }
+
+    //this here actual implemetnation is done considering the this.currentFunction's value
+    if (this.currentFunction == "*") {
+      //here the ans is updated
+      this.ans = this.multiply(valueToBeOperated, this.currentValue);
+    }
+
+    //this here actual implemetnation is done considering the this.currentFunction's value
+    if (this.currentFunction == "/") {
+      //here the ans is updated
+      this.ans = this.divide(valueToBeOperated, this.currentValue);
+    }
+
+    // when either of the above is finished then this return the value of computation
+    //and updates all the necessary thing to maintain the logic
+    return this.update(this.ans, valueToBeOperated);
+  }
+  /*
+  
+  
+  */
+
   //BASIC OPERATIONS
 
   //ADD
   add(valueToBeOperated, currentValue) {
-    return currentValue + valueToBeOperated;
+    return parseFloat(currentValue) + parseFloat(valueToBeOperated);
   }
 
   //SUBTRACT
   sub(valueToBeOperated, currentValue) {
-    return currentValue - valueToBeOperated;
+    return parseFloat(currentValue) - parseFloat(valueToBeOperated);
   }
 
   // MULTIPLY
   multiply(valueToBeOperated, currentValue) {
-    return currentValue * valueToBeOperated;
+    return parseFloat(currentValue) * parseFloat(valueToBeOperated);
   }
 
   //DIVIDE
   divide(valueToBeOperated, currentValue) {
-    return currentValue / valueToBeOperated;
+    return parseFloat(currentValue) / parseFloat(valueToBeOperated);
   }
   /*
   
@@ -185,4 +193,11 @@ class Calculator {
   }
 }
 
-let calc = new Calculator();
+let calculator = new Calculator();
+
+calculator.operations(0);
+calculator.currentFunction = "+";
+
+console.log(calculator.operations(9));
+
+module.exports = calculator;
