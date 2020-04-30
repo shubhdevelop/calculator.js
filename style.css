@@ -63,11 +63,11 @@
 .body p {
   justify-self: end;
   padding: 3%;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .body :nth-child(1) {
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .numbers {
@@ -95,6 +95,25 @@
   position: relative;
 
   font-size: 1.5em;
+}
+
+.extra,
+.verticle {
+  box-shadow: 2px 2px 10px black;
+  background-color: rgba(206, 249, 255, 0.472);
+  border-radius: 2em;
+
+  padding-top: 47%;
+  text-align: center;
+
+  margin: 4% 8%;
+  transition: box-shadow 250ms ease-in;
+}
+
+.extra p {
+  position: relative;
+
+  font-size: 1em;
 }
 
 .different {
